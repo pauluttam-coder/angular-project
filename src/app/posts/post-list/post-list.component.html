@@ -1,0 +1,57 @@
+<section id="hero" class="hero d-flex align-items-center section-bg">
+  <div class="container">
+    <div>
+      <p class="pagetitle">Posts List</p>
+    </div>
+    
+    <!-- Table start -->
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of pageData | 
+          paginate: { 
+          id: 'server-paginate',
+          itemsPerPage: pageSize, 
+          currentPage: page, 
+          totalItems: count }">
+          <th scope="row">{{item?.id}}</th>
+          <td>{{item?.title.toUpperCase()}}</td>
+          <td title="{{item?.body}}">{{item?.body | shortText : 15}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Table end -->
+
+    <!-- Pagination start -->
+    <div class="table-navigation text-center pagination-area" *ngIf="pageData.length > 0">
+      <div>
+        <pagination-controls id="server-paginate" (pageChange)="onPageChange($event)" class="w-100">
+        </pagination-controls>
+      </div>
+      <div>
+        <select class="form-select" aria-label="Default select example" (change)="onPageSizeChange($event)"
+          [(ngModel)]="pageSize">
+          <option selected value="" disabled>Select Page Size</option>
+          <option value="10">10 Per Page</option>
+          <option value="20">20 Per Page</option>
+          <option value="30">30 Per Page</option>
+          <option value="40">40 Per Page</option>
+          <option value="50">50 Per Page</option>
+        </select>
+      </div>
+    </div>
+    <!-- Pagination end -->
+
+    <!-- No records found start-->
+    <div *ngIf="pageData.length == 0" class="text-center">
+      <p> No records found</p>
+    </div>
+    <!-- No records found end-->
+  </div>
+</section>

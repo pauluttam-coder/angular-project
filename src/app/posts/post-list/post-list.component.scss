@@ -1,0 +1,12 @@
+.pagetitle{
+    font-size: 20px;
+    font-weight: 600 !important;
+    color: black;
+}
+.pagination-area{
+    display: flex;
+    justify-content: space-between;
+}
+::ng-deep .ngx-pagination{
+    padding-left: 0px !important;
+}
